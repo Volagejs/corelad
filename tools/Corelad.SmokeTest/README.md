@@ -49,8 +49,10 @@ tools\Corelad.SmokeTest\bin\Debug\Corelad.SmokeTest.exe --probe
 8. `Undo(1)`: yalnızca kaynak kalmalı.
 9. Belgeyi kaydetmeden kapat.
 
-P2 ilavesi, CorelDRAW'da yeni bir dikdörtgen oluşturur ve Smart Divide'a verir. Nesne
-`cdrCurveShape` olmadığı için `UnsupportedObject` ile atlanmalı ve şekil sayısı artmamalıdır.
-Bu kontrol grup ve PowerClip davranışını kapsamaz.
+P2 ilavesi; dikdörtgen, eğri içeren grup, grup içindeki eğri, `cdrCurveShape` PowerClip
+çerçevesi ve PowerClip içindeki eğri oluşturur. Her durum `UnsupportedObject` ile atlanmalı;
+Smart Divide hiçbir yeni şekil yazmamalıdır. Belge yalnızca harness'ın oluşturduğu geçici
+belgedir ve kaydedilmeden kapatılır. `SmartDivideProblemReportAdapter` ayrıca atlama kodunu ve
+mesajı panelin gösterebildiği `Problem` girdisine çevirmelidir.
 
 Beklenen çıktı: `SMOKE SONUCU: PASS`.

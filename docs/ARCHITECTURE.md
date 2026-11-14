@@ -67,8 +67,9 @@ Problem       { ProblemCode Code, Severity Severity, int? ShapeId, int? SubPathI
 
 ## 4. Smart Divide akışı (P1 uygulaması)
 
-1. Seçili tek `cdrCurveShape` doğrulanır. Grup/PowerClip/bitmap/efekt **açılmaz**;
-   `UnsupportedObject` ile hiç yazmadan dönülür. Kaynak `ConvertToCurves` ile değiştirilmez.
+1. Seçili tek ve bağımsız `cdrCurveShape` doğrulanır. Grup/PowerClip çerçevesi veya içindeki
+   nesne, bitmap/efekt **açılmaz**; `UnsupportedObject` ile hiç yazmadan dönülür. Kaynak
+   `ConvertToCurves` ile değiştirilmez.
 2. Alt konturlar `Curve.SubPaths` üzerinden **salt okuma** ile alınır; her segmentin uç ve
    kontrol noktaları POCO'ya çevrilir. Belge birimi → mm dönüşümü tek noktada (`CorelUnits`).
 3. Her alt kontur için analiz kopyası üretilir (adaptif bezier düzleştirme). **Güvenilir iç
@@ -78,7 +79,9 @@ Problem       { ProblemCode Code, Severity Severity, int? ShapeId, int? SubPathI
 5. Ağaç: çift derinlik = dış gövde, tek derinlik = delik, çift derinlik = ada. Ayrık parçalar
    (İ noktası, j noktası, Ç/Ğ işaretleri) **bağlanmaz**; yalnızca `DetachedComponent` uyarısı.
 6. Belirsizlik tespiti → `Problem` (bkz. §7). `Error` varsa hiçbir nesne yazılmaz.
-7. Önizleme P1'de yoktur; sonuç raporu metinseldir.
+7. Analiz `Problem` kayıtları ve `SmartDivideRunResult` rapor adaptöründen `ProblemReportViewModel`'e
+   taşınır. WPF paneli Türkçe başlık/açıklama ve indeksleri gösterir; seçilen sorun için yalnızca
+   kontur vurgu isteği üretir. Corel'de vurgu uygulama ve paneli dock kabuğuna yerleştirme henüz yoktur.
 8. Uygulama: tüm aday eğrileri **detached** olarak kurulur ve yaz→oku round-trip ile doğrulanır.
    Doğrulama geçerse `BeginCommandGroup` → aday başına bir `Layer.CreateCurve` (gövde + delikler
    aynı curve içinde) → `EndCommandGroup`. Kaynak şekle dokunulmaz; tek `Ctrl+Z` tüm yeni
@@ -157,7 +160,7 @@ seçeneğiyle ilerlenir; atlanan parçalar raporlanır.
 - Derleme: `Corel.Interop.VGCore.dll` **referans** olarak kurulu CorelDRAW'dan; repoya kopyalanmaz.
 - Sürüm: `policy.27.x.Corel.Interop.VGCore.dll` yönlendirmesi nedeniyle v27.x içinde çalışır.
 
-### 11.1 P1'de ampirik olarak doğrulananlar (v27.2.0.135)
+### 11.1 P1/P2'de ampirik olarak doğrulananlar (v27.2.0.135)
 
 - Otomasyon başlatma: interop'taki `ApplicationClass` CLSID'i (`{4BBE0002-…}`) bu kurulumda
   kayıtlı değildir. Kurulum `CorelDRAW.Application.27` ProgID'sini `{F35B0002-…}` CLSID'ine
@@ -172,6 +175,10 @@ seçeneğiyle ilerlenir; atlanan parçalar raporlanır.
 - `Layer.CreateCurve(Curve)` yeni şekli aktif katmana ekler; `Document.Undo(1)` bir
   `BeginCommandGroup`/`EndCommandGroup` içindeki tüm yeni şekilleri kaldırır.
 - Belge kaydedilmeden kapatma: `Document.Dirty = false` + `Document.Close()`.
+- Smart Divide yalnızca nesne türünü kontrol etmez: `PowerClip`, `PowerClipParent` ve
+  `ParentGroup` ilişkileri olan eğriyi de `UnsupportedObject` ile atlar. Dikdörtgen, grup,
+  grup içindeki eğri, PowerClip çerçevesi ve PowerClip içindeki eğri smoke harness'ta
+  denendi; her çağrıda şekil sayısı değişmedi.
 
 ### 11.2 Doğrulanmamış varsayımlar
 

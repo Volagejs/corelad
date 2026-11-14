@@ -45,6 +45,20 @@ namespace Corelad.Dock.Corel
                         sourceShape.Type));
             }
 
+            // Eğri görünümlü PowerClip çerçevesi hâlâ cdrCurveShape olabilir.
+            // Böyle bir nesnenin Curve özelliği yalnızca çerçeveyi temsil edebilir;
+            // içeriği kayıpsız böldüğümüzü iddia edemeyiz. Gruplu alt nesneleri de ele alma.
+            if (sourceShape.PowerClip != null ||
+                sourceShape.PowerClipParent != null ||
+                sourceShape.ParentGroup != null)
+            {
+                return SmartDivideRunResult.SkippedFor(
+                    null,
+                    ProblemCode.UnsupportedObject,
+                    "Grup veya PowerClip içindeki eğri desteklenmiyor. Önce CorelDRAW'da " +
+                    "tek başına bağımsız bir cdrCurveShape seçin; hiçbir nesne yazılmadı.");
+            }
+
             var contours = CorelCurveReader.Read(document, sourceShape, 1, Tolerances);
             var analysis = _analyzer.Analyze(contours);
 

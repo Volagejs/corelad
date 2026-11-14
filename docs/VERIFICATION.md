@@ -70,6 +70,10 @@ Kural: Bir rapor satırı birden fazla etiket taşıyamaz. "Derleme geçti" cüm
 | 2026-11-14 | Tek `Undo(1)` command group içindeki 7 yeni şekli kaldırdı, kaynak kaldı | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke `PASS Undo(1)…` |
 | 2026-11-14 | Arial `ÇĞİıÖŞÜ` konturları testte kaybolmadan ve deterministik analiz ediliyor | `[DOĞRULANDI: birim testi]` | `FontOutlineTests.TurkishCharacterSet_IsAnalyzedDeterministicallyWithoutLosingContours`; 52/52 |
 | 2026-11-14 | `cdrRectangleShape` Smart Divide tarafından `UnsupportedObject` olarak atlanıyor, yeni şekil yazılmıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Corel smoke P2 kontrolü; şekil sayısı 2'de kaldı |
+| 2026-11-14 | Grup nesnesi ve grup içindeki `cdrCurveShape` otomatik açılmadan `UnsupportedObject` ile atlanıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; grup ve iç eğri için şekil sayısı değişmedi |
+| 2026-11-14 | `cdrCurveShape` PowerClip çerçevesi ve içindeki eğri `UnsupportedObject` ile atlanıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; çerçeve/içerik için şekil sayısı değişmedi |
+| 2026-11-14 | Atlanan nesnenin `SkipCode` ve mesajı panelin `Problem` kaydına çevriliyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; dikdörtgen, grup ve PowerClip sonuçları `UnsupportedObject` hata girdisine dönüştü |
+| 2026-11-14 | Sorun raporu paneli XAML'i ve `SmartDivideProblemReportAdapter` derleniyor | `[DOĞRULANDI: derleme]` | `dotnet build Corelad.sln -c Debug` — 0 uyarı/hata |
 
 **V2 notu:** P0'da test projesi bilinçli olarak 0 test içeriyordu; P1'de 51 test ile V2 kapısı
 karşılandı. Testler CorelDRAW açmadan çalışır; gerçek font konturları GDI+ ile üretilir (ADR-0008).
@@ -84,6 +88,9 @@ PASS  7 aday, 2 delik, 0 Error, 7 yeni cdrCurveShape, şekil sayısı +7
 PASS  Kaynak geometrisi değişmedi (imza aynı)
 PASS  Undo(1) sonrası yalnızca kaynak kaldı
 PASS  cdrRectangleShape UnsupportedObject olarak atlandı, şekil eklenmedi
+PASS  Grup + grup içindeki eğri UnsupportedObject olarak atlandı
+PASS  PowerClip çerçevesi + içindeki eğri UnsupportedObject olarak atlandı
+PASS  UnsupportedObject skip nedenleri rapor paneli Problem girdilerine çevrildi
 Belge kaydedilmeden kapatıldı.
 SMOKE SONUCU: PASS
 ```
@@ -97,7 +104,8 @@ SMOKE SONUCU: PASS
 | XSLT ile dock v27.2'de açılır | `[DOĞRULANMADI]` | P5: gerçek CorelDRAW |
 | Kullanıcı bazlı addon yolu destekleniyor | `[VARSAYIM]` | P5: `%APPDATA%` altında deneme |
 | Gerçek üretim `MUSTAFA.cdr` fixture'ı | `[DOĞRULANMADI]` | P2: kullanıcı dosyasıyla V4/V5 |
-| Grup/PowerClip seçiminde davranış | `[DOĞRULANMADI]` | P2: `UnsupportedObject` smoke |
+| Gerçek üretim belgesinde grup/PowerClip içeriğinin kullanıcıya raporlanma akışı | `[DOĞRULANMADI]` | P2 sorun raporu arayüzü + gerçek belge V5 |
+| Sorun raporu panelinin CorelDRAW dock'unda açılması ve vurgu isteğinin COM ile uygulanması | `[DOĞRULANMADI]` | Addon host kaydı + Corel vurgu tüketicisi + v27.2 smoke |
 | SVG round-trip ölçek/yön korunumu | `[DOĞRULANMADI]` | Yalnızca gerekirse; SVG birincil yol değil |
 | Corel ikililerinin müşteri makinesinde yeniden dağıtımı | `[VARSAYIM]` | Hukuki teyit; DLL dağıtılmıyor |
 

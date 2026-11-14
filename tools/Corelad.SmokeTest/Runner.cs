@@ -22,7 +22,7 @@ namespace Corelad.SmokeTest
             var tolerances = new GeometryTolerances();
             tolerances.Validate();
 
-            Console.WriteLine("=== Corelad P1 smoke (CorelDRAW) ===");
+            Console.WriteLine("=== Corelad P1/P2 smoke (CorelDRAW) ===");
 
             var application = CorelApplicationFactory.Create();
             Console.WriteLine("CorelDRAW sürümü: " + application.Version);
@@ -141,7 +141,92 @@ namespace Corelad.SmokeTest
                         "Atlama kodu UnsupportedObject", unsupportedResult.SkipCode);
                     Check(beforeUnsupportedRun == afterUnsupportedRun,
                         "Desteklenmeyen nesne çalıştırması şekil eklemedi", afterUnsupportedRun);
+                    var unsupportedProblems = SmartDivideProblemReportAdapter.ToProblems(unsupportedResult);
+                    Check(unsupportedProblems.Count == 1 &&
+                          unsupportedProblems[0].Code == ProblemCode.UnsupportedObject &&
+                          unsupportedProblems[0].Severity == ProblemSeverity.Error,
+                        "UnsupportedObject sonucu panel için hata kaydına çevrildi");
                 }
+
+                // P2: grup nesnesi alt şekillerini otomatik açmamalı veya yazmamalı.
+                var groupPartA = document.ActiveLayer.CreateRectangle(20, 0, 30, 10, 0, 0, 0, 0);
+                var groupCurve = document.ActiveLayer.CreateCurve(
+                    CorelCurveWriter.BuildCurve(document, FontOutlineSource.FromText("A").Contours, tolerances));
+                var groupRange = application.CreateShapeRange();
+                groupRange.Add(groupPartA);
+                groupRange.Add(groupCurve);
+                var groupShape = groupRange.Group();
+                Check(groupShape != null && groupShape.Type == cdrShapeType.cdrGroupShape,
+                    "Dikdörtgen + eğri içeren grup oluşturuldu", groupShape == null ? null : groupShape.Type);
+
+                if (groupShape != null)
+                {
+                    int beforeGroupRun = document.ActivePage.Shapes.Count;
+                    var groupResult = service.Run(document, groupShape);
+                    int afterGroupRun = document.ActivePage.Shapes.Count;
+
+                    Check(groupResult.Skipped && !groupResult.Applied,
+                        "Grup nesnesi güvenli biçimde atlandı");
+                    Check(groupResult.SkipCode == ProblemCode.UnsupportedObject,
+                        "Grup atlama kodu UnsupportedObject", groupResult.SkipCode);
+                    Check(beforeGroupRun == afterGroupRun,
+                        "Grup çalıştırması şekil eklemedi", afterGroupRun);
+                    var groupProblems = SmartDivideProblemReportAdapter.ToProblems(groupResult);
+                    Check(groupProblems.Count == 1 && groupProblems[0].Code == ProblemCode.UnsupportedObject,
+                        "Grup atlama nedeni rapor paneline aktarılabilir");
+                }
+
+                int beforeGroupedCurveRun = document.ActivePage.Shapes.Count;
+                var groupedCurveResult = service.Run(document, groupCurve);
+                int afterGroupedCurveRun = document.ActivePage.Shapes.Count;
+                Check(groupCurve.Type == cdrShapeType.cdrCurveShape,
+                    "Grup içi eğri cdrCurveShape türünde", groupCurve.Type);
+                Check(groupCurve.ParentGroup != null,
+                    "Eğri nesnesinin ParentGroup ilişkisi mevcut");
+                Check(groupedCurveResult.Skipped && !groupedCurveResult.Applied,
+                    "Grup içindeki eğri güvenli biçimde atlandı");
+                Check(groupedCurveResult.SkipCode == ProblemCode.UnsupportedObject,
+                    "Grup içindeki eğrinin atlama kodu UnsupportedObject", groupedCurveResult.SkipCode);
+                Check(beforeGroupedCurveRun == afterGroupedCurveRun,
+                    "Grup içindeki eğri çalıştırması şekil eklemedi", afterGroupedCurveRun);
+
+                // P2: cdrCurveShape türündeki bir PowerClip çerçevesi de açıkça reddedilmeli.
+                var powerClipContent = document.ActiveLayer.CreateCurve(
+                    CorelCurveWriter.BuildCurve(document, FontOutlineSource.FromText("O").Contours, tolerances));
+                powerClipContent.AddToPowerClip(sourceShape, cdrTriState.cdrTrue);
+                Check(sourceShape.PowerClip != null, "PowerClip çerçevesi oluşturuldu");
+
+                int beforePowerClipRun = document.ActivePage.Shapes.Count;
+                var powerClipResult = service.Run(document, sourceShape);
+                int afterPowerClipRun = document.ActivePage.Shapes.Count;
+
+                Check(sourceShape.Type == cdrShapeType.cdrCurveShape,
+                    "PowerClip çerçevesi eğri türünde", sourceShape.Type);
+                Check(powerClipResult.Skipped && !powerClipResult.Applied,
+                    "PowerClip eğrisi güvenli biçimde atlandı");
+                Check(powerClipResult.SkipCode == ProblemCode.UnsupportedObject,
+                    "PowerClip atlama kodu UnsupportedObject", powerClipResult.SkipCode);
+                Check(beforePowerClipRun == afterPowerClipRun,
+                    "PowerClip çalıştırması şekil eklemedi", afterPowerClipRun);
+                var powerClipProblems = SmartDivideProblemReportAdapter.ToProblems(powerClipResult);
+                Check(powerClipProblems.Count == 1 &&
+                      powerClipProblems[0].Code == ProblemCode.UnsupportedObject &&
+                      powerClipProblems[0].Message == powerClipResult.Message,
+                    "PowerClip atlama nedeni panel için ayrıntısıyla raporlandı");
+
+                int beforePowerClipChildRun = document.ActivePage.Shapes.Count;
+                var powerClipChildResult = service.Run(document, powerClipContent);
+                int afterPowerClipChildRun = document.ActivePage.Shapes.Count;
+                Check(powerClipContent.Type == cdrShapeType.cdrCurveShape,
+                    "PowerClip içindeki nesne eğri türünde", powerClipContent.Type);
+                Check(powerClipContent.PowerClipParent != null,
+                    "PowerClip içindeki eğrinin ebeveyni mevcut");
+                Check(powerClipChildResult.Skipped && !powerClipChildResult.Applied,
+                    "PowerClip içindeki eğri güvenli biçimde atlandı");
+                Check(powerClipChildResult.SkipCode == ProblemCode.UnsupportedObject,
+                    "PowerClip içindeki eğrinin atlama kodu UnsupportedObject", powerClipChildResult.SkipCode);
+                Check(beforePowerClipChildRun == afterPowerClipChildRun,
+                    "PowerClip içindeki eğri çalıştırması şekil eklemedi", afterPowerClipChildRun);
             }
             catch (Exception exception)
             {
