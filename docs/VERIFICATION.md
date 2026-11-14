@@ -72,6 +72,7 @@ Kural: Bir rapor satırı birden fazla etiket taşıyamaz. "Derleme geçti" cüm
 | 2026-11-14 | `cdrRectangleShape` Smart Divide tarafından `UnsupportedObject` olarak atlanıyor, yeni şekil yazılmıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Corel smoke P2 kontrolü; şekil sayısı 2'de kaldı |
 | 2026-11-14 | Grup nesnesi ve grup içindeki `cdrCurveShape` otomatik açılmadan `UnsupportedObject` ile atlanıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; grup ve iç eğri için şekil sayısı değişmedi |
 | 2026-11-14 | `cdrCurveShape` PowerClip çerçevesi ve içindeki eğri `UnsupportedObject` ile atlanıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; çerçeve/içerik için şekil sayısı değişmedi |
+| 2026-11-14 | Atlanan nesnenin `SkipCode` ve mesajı panelin `Problem` kaydına çevriliyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; dikdörtgen, grup ve PowerClip sonuçları `UnsupportedObject` hata girdisine dönüştü |
 | 2026-11-14 | Sorun raporu paneli XAML'i ve `SmartDivideProblemReportAdapter` derleniyor | `[DOĞRULANDI: derleme]` | `dotnet build Corelad.sln -c Debug` — 0 uyarı/hata |
 
 **V2 notu:** P0'da test projesi bilinçli olarak 0 test içeriyordu; P1'de 51 test ile V2 kapısı
@@ -89,6 +90,7 @@ PASS  Undo(1) sonrası yalnızca kaynak kaldı
 PASS  cdrRectangleShape UnsupportedObject olarak atlandı, şekil eklenmedi
 PASS  Grup + grup içindeki eğri UnsupportedObject olarak atlandı
 PASS  PowerClip çerçevesi + içindeki eğri UnsupportedObject olarak atlandı
+PASS  UnsupportedObject skip nedenleri rapor paneli Problem girdilerine çevrildi
 Belge kaydedilmeden kapatıldı.
 SMOKE SONUCU: PASS
 ```

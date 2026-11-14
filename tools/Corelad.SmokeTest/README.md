@@ -52,6 +52,7 @@ tools\Corelad.SmokeTest\bin\Debug\Corelad.SmokeTest.exe --probe
 P2 ilavesi; dikdörtgen, eğri içeren grup, grup içindeki eğri, `cdrCurveShape` PowerClip
 çerçevesi ve PowerClip içindeki eğri oluşturur. Her durum `UnsupportedObject` ile atlanmalı;
 Smart Divide hiçbir yeni şekil yazmamalıdır. Belge yalnızca harness'ın oluşturduğu geçici
-belgedir ve kaydedilmeden kapatılır.
+belgedir ve kaydedilmeden kapatılır. `SmartDivideProblemReportAdapter` ayrıca atlama kodunu ve
+mesajı panelin gösterebildiği `Problem` girdisine çevirmelidir.
 
 Beklenen çıktı: `SMOKE SONUCU: PASS`.

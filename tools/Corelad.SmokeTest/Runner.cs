@@ -141,6 +141,11 @@ namespace Corelad.SmokeTest
                         "Atlama kodu UnsupportedObject", unsupportedResult.SkipCode);
                     Check(beforeUnsupportedRun == afterUnsupportedRun,
                         "Desteklenmeyen nesne çalıştırması şekil eklemedi", afterUnsupportedRun);
+                    var unsupportedProblems = SmartDivideProblemReportAdapter.ToProblems(unsupportedResult);
+                    Check(unsupportedProblems.Count == 1 &&
+                          unsupportedProblems[0].Code == ProblemCode.UnsupportedObject &&
+                          unsupportedProblems[0].Severity == ProblemSeverity.Error,
+                        "UnsupportedObject sonucu panel için hata kaydına çevrildi");
                 }
 
                 // P2: grup nesnesi alt şekillerini otomatik açmamalı veya yazmamalı.
@@ -166,6 +171,9 @@ namespace Corelad.SmokeTest
                         "Grup atlama kodu UnsupportedObject", groupResult.SkipCode);
                     Check(beforeGroupRun == afterGroupRun,
                         "Grup çalıştırması şekil eklemedi", afterGroupRun);
+                    var groupProblems = SmartDivideProblemReportAdapter.ToProblems(groupResult);
+                    Check(groupProblems.Count == 1 && groupProblems[0].Code == ProblemCode.UnsupportedObject,
+                        "Grup atlama nedeni rapor paneline aktarılabilir");
                 }
 
                 int beforeGroupedCurveRun = document.ActivePage.Shapes.Count;
@@ -200,6 +208,11 @@ namespace Corelad.SmokeTest
                     "PowerClip atlama kodu UnsupportedObject", powerClipResult.SkipCode);
                 Check(beforePowerClipRun == afterPowerClipRun,
                     "PowerClip çalıştırması şekil eklemedi", afterPowerClipRun);
+                var powerClipProblems = SmartDivideProblemReportAdapter.ToProblems(powerClipResult);
+                Check(powerClipProblems.Count == 1 &&
+                      powerClipProblems[0].Code == ProblemCode.UnsupportedObject &&
+                      powerClipProblems[0].Message == powerClipResult.Message,
+                    "PowerClip atlama nedeni panel için ayrıntısıyla raporlandı");
 
                 int beforePowerClipChildRun = document.ActivePage.Shapes.Count;
                 var powerClipChildResult = service.Run(document, powerClipContent);

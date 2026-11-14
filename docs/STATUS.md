@@ -65,7 +65,7 @@ Son güncelleme: 2026-11-14
 | `dotnet test` (geometri) | **PASS** — 51/51, 0 başarısız |
 | V4 smoke (gerçek CorelDRAW v27.2.0.135) | **PASS** — 7 aday, 2 delik, 0 Error; kaynak imzası değişmedi; `Undo(1)` yeni 7 nesneyi kaldırdı |
 | P2 Türkçe karakter regresyonu | **PASS** — `ÇĞİıÖŞÜ` konturları kaybolmadan, deterministik analiz edildi; 52/52 test |
-| P2 UnsupportedObject smoke | **PASS** — dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve içindeki eğri atlandı; hiçbiri çıktı yazmadı |
+| P2 UnsupportedObject smoke | **PASS** — dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve içindeki eğri atlandı; hiçbiri çıktı yazmadı; atlama hatası rapora çevrildi |
 | P2 sorun raporu bileşeni | **DERLENDİ** — WPF paneli ve run-result adaptörü çözüm içinde derleniyor; CorelDRAW dock'unda açılma doğrulanmadı |
 | Kaynak belge kaydı | **Yapılmadı** — `Dirty = false` + `Close()` |
 | Addon klasörüne yazma | **Yapılmadı** |
