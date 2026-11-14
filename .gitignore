@@ -1,0 +1,40 @@
+# Build çıktıları
+bin/
+obj/
+artifacts/
+TestResults/
+publish/
+*.binlog
+*.trx
+*.user
+*.suo
+.vs/
+
+# Kullanıcıya ait yerel Windows ikilisi; Git'e eklenmemeli.
+/cmd.exe
+
+# Gerçek CorelDRAW üretim çizimleri yerel kalır.
+*.cdr
+*.cmx
+*.cdt
+*.des
+
+# Yerel sırlar ve imzalama anahtarları
+.env
+.env.*
+!.env.example
+*.pfx
+*.pem
+*.key
+
+# Corel lisanslı ikililer ve türevleri repoya girmez
+Corel.Interop.*.dll
+VGCore.dll
+*.tlb
+!src/**/TypeLibs/README.md
+
+# Editör / işletim sistemi
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini

@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Corelad.Dock — CorelDRAW 2026 (v27.x) addon + WPF dock.
+    KURAL: Burada geometri algoritması YAZILMAZ; yalnızca COM <-> POCO, UI, iptal, undo (ADR-0004).
+    P0: iskelet. Corel interop referansı koşulludur; repoya DLL konmaz (ADR-0003).
+
+    Derleme için kurulu CorelDRAW gerekir; yoksa proje yine derlenir (COM kodu P1'de eklenecek).
+  -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Corelad.Dock</RootNamespace>
+    <AssemblyName>Corelad.Dock</AssemblyName>
+    <Platforms>AnyCPU;x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <!-- CorelDRAW kurulumu bu makinede varsa interop referansı eklenir; yoksa atlanır. -->
+  <PropertyGroup>
+    <CorelProgramsDir Condition="'$(CorelProgramsDir)' == ''">C:\Program Files\Corel\CorelDRAW Graphics Suite\27\Programs64\</CorelProgramsDir>
+    <CorelInteropVGCore>$(CorelProgramsDir)Assemblies\Corel.Interop.VGCore.dll</CorelInteropVGCore>
+  </PropertyGroup>
+
+  <ItemGroup Condition="Exists('$(CorelInteropVGCore)')">
+    <Reference Include="Corel.Interop.VGCore">
+      <HintPath>$(CorelInteropVGCore)</HintPath>
+      <Private>false</Private>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Corelad.Geometry\Corelad.Geometry.csproj" />
+  </ItemGroup>
+
+</Project>

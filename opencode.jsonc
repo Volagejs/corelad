@@ -1,0 +1,12 @@
+{
+  // Corelad — proje düzeyi OpenCode yapılandırması.
+  // Global ayar (~/.config/opencode/opencode.json) kapsam dışıdır ve değiştirilmez.
+  "$schema": "https://opencode.ai/config.json",
+
+  // Proje talimatı. OpenCode CLAUDE.md okumaz; bağlayıcı kurallar AGENTS.md'dedir.
+  "instructions": ["AGENTS.md"],
+
+  // Skill'ler .opencode/skills/ altından otomatik keşfedilir; ayrıca yol eklemek gerekmez.
+  // Komutlar .opencode/commands/ altından otomatik keşfedilir.
+  // Agent tanımları P1'de ihtiyaç doğduğunda eklenecek.
+}

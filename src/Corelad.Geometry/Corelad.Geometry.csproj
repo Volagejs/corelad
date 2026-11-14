@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Corelad.Geometry — saf geometri çekirdeği.
+    KURAL: CorelDRAW, WPF veya System.Windows referansı EKLEME (ADR-0004).
+    P0: yalnızca iskelet; üretim kodu P1'de.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Corelad.Geometry</RootNamespace>
+    <AssemblyName>Corelad.Geometry</AssemblyName>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+
+</Project>

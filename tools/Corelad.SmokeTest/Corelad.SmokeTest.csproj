@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Corelad.SmokeTest — gerçek CorelDRAW 2026 (x64) üzerinde P1 smoke harness'ı.
+    Ayrı bir yeni belge açar, kaydetmeden kapatır; mevcut belgelere dokunmaz.
+    Corel interop DLL'i repoya kopyalanmaz (Private=false); çalışma zamanında
+    kurulu CorelDRAW klasöründen yüklenir (ADR-0003).
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>Corelad.SmokeTest</RootNamespace>
+    <AssemblyName>Corelad.SmokeTest</AssemblyName>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CorelProgramsDir Condition="'$(CorelProgramsDir)' == ''">C:\Program Files\Corel\CorelDRAW Graphics Suite\27\Programs64\</CorelProgramsDir>
+    <CorelInteropVGCore>$(CorelProgramsDir)Assemblies\Corel.Interop.VGCore.dll</CorelInteropVGCore>
+  </PropertyGroup>
+
+  <ItemGroup Condition="Exists('$(CorelInteropVGCore)')">
+    <Reference Include="Corel.Interop.VGCore">
+      <HintPath>$(CorelInteropVGCore)</HintPath>
+      <Private>false</Private>
+      <EmbedInteropTypes>false</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Corelad.Geometry\Corelad.Geometry.csproj" />
+    <ProjectReference Include="..\..\src\Corelad.Dock\Corelad.Dock.csproj" />
+  </ItemGroup>
+
+</Project>

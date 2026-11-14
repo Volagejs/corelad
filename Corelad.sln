@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0615A01-70B0-467E-B2A9-12552A496D07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corelad.Geometry", "src\Corelad.Geometry\Corelad.Geometry.csproj", "{6309B4B9-BBC8-404C-8FCE-3CD1B12F397E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corelad.Dock", "src\Corelad.Dock\Corelad.Dock.csproj", "{1F69F801-7E9C-4208-9791-A6EDD3EA9226}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0619853B-7F02-471C-BA50-A9CD6B833143}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corelad.Geometry.Tests", "tests\Corelad.Geometry.Tests\Corelad.Geometry.Tests.csproj", "{3324014E-2346-4634-A399-83E3E19E8E03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{CBE45A80-25CC-48E5-ACF8-A9C019803EEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Corelad.SmokeTest", "tools\Corelad.SmokeTest\Corelad.SmokeTest.csproj", "{5AB3B039-87C6-4BC5-AAE7-32439CBF9845}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6309B4B9-BBC8-404C-8FCE-3CD1B12F397E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6309B4B9-BBC8-404C-8FCE-3CD1B12F397E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6309B4B9-BBC8-404C-8FCE-3CD1B12F397E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6309B4B9-BBC8-404C-8FCE-3CD1B12F397E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F69F801-7E9C-4208-9791-A6EDD3EA9226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F69F801-7E9C-4208-9791-A6EDD3EA9226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F69F801-7E9C-4208-9791-A6EDD3EA9226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F69F801-7E9C-4208-9791-A6EDD3EA9226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3324014E-2346-4634-A399-83E3E19E8E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3324014E-2346-4634-A399-83E3E19E8E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3324014E-2346-4634-A399-83E3E19E8E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3324014E-2346-4634-A399-83E3E19E8E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB3B039-87C6-4BC5-AAE7-32439CBF9845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB3B039-87C6-4BC5-AAE7-32439CBF9845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB3B039-87C6-4BC5-AAE7-32439CBF9845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB3B039-87C6-4BC5-AAE7-32439CBF9845}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6309B4B9-BBC8-404C-8FCE-3CD1B12F397E} = {F0615A01-70B0-467E-B2A9-12552A496D07}
+		{1F69F801-7E9C-4208-9791-A6EDD3EA9226} = {F0615A01-70B0-467E-B2A9-12552A496D07}
+		{3324014E-2346-4634-A399-83E3E19E8E03} = {0619853B-7F02-471C-BA50-A9CD6B833143}
+		{5AB3B039-87C6-4BC5-AAE7-32439CBF9845} = {CBE45A80-25CC-48E5-ACF8-A9C019803EEE}
+	EndGlobalSection
+EndGlobal
