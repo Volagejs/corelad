@@ -27,7 +27,8 @@ Kurallar:
 - Tüm COM çağrıları UI thread'inde; hesap arka planda POCO kopyasıyla.
 - `Corel.Interop.VGCore.dll` referansı kurulu CorelDRAW'dan alınır, repoya konmaz (`Private=false`).
 - Kaynak nesneler varsayılan olarak değiştirilmez; uygulama tek undo grubunda.
-- Kaynak şekil `cdrCurveShape` değilse hiçbir şey yazılmaz (`UnsupportedObject`).
+- Kaynak şekil bağımsız bir `cdrCurveShape` değilse (grup/PowerClip veya iç nesnesi dahil)
+  hiçbir şey yazılmaz (`UnsupportedObject`).
 - Yazma öncesi detached `Curve` geri okunur; geometri eşleşmezse hiçbir şey eklenmez.
 
 Ayrıntılı sözleşme: `docs/P1-integration-plan.md`.

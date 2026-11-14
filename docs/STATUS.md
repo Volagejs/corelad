@@ -8,7 +8,7 @@ Son güncelleme: 2026-11-14
 |---|---|---|---|
 | P0 | Proje iskeleti + dokümantasyon | **TAMAMLANDI** | Üretim kodu yok, CorelDRAW kurulumu yok |
 | P1 | Çalışan dikey dilim (seçim → analiz → geri yaz) | **TAMAMLANDI** | V4 smoke PASS (v27.2.0.135); UI/addon yok (P5) |
-| P2 | Smart Divide sertleştirme | **DEVAM EDİYOR** | Türkçe regresyon + eğri olmayan nesne smoke kontrolü eklendi |
+| P2 | Smart Divide sertleştirme | **DEVAM EDİYOR** | Türkçe regresyon + UnsupportedObject grup/PowerClip smoke kontrolleri |
 | P3 | Nesting v1 (tek levha) | Bekliyor | — |
 | P4 | Nesting v2 (çoklu levha, delik içi, bütçe) | Bekliyor | — |
 | P5 | UX + paketleme | Bekliyor | — |
@@ -63,7 +63,7 @@ Son güncelleme: 2026-11-14
 | `dotnet test` (geometri) | **PASS** — 51/51, 0 başarısız |
 | V4 smoke (gerçek CorelDRAW v27.2.0.135) | **PASS** — 7 aday, 2 delik, 0 Error; kaynak imzası değişmedi; `Undo(1)` yeni 7 nesneyi kaldırdı |
 | P2 Türkçe karakter regresyonu | **PASS** — `ÇĞİıÖŞÜ` konturları kaybolmadan, deterministik analiz edildi; 52/52 test |
-| P2 UnsupportedObject smoke | **PASS** — gerçek CorelDRAW'da dikdörtgen atlandı; `UnsupportedObject`; şekil eklenmedi |
+| P2 UnsupportedObject smoke | **PASS** — dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve içindeki eğri atlandı; hiçbiri çıktı yazmadı |
 | Kaynak belge kaydı | **Yapılmadı** — `Dirty = false` + `Close()` |
 | Addon klasörüne yazma | **Yapılmadı** |
 | Corel interop çıktıya kopyalama | **Yapılmadı** (`Private=false`) |
@@ -115,9 +115,10 @@ P1'de tamamlananlar:
 4. `CreateCurveFromArray` + `SubPath.Closed` semantiği ampirik olarak doğrulandı.
 
 P2 çalışması: `ÇĞİıÖŞÜ` için deterministik font konturu regresyonu eklendi; gerçek CorelDRAW'da
-eğri olmayan dikdörtgenin `UnsupportedObject` olarak atlandığı ve şekil sayısının değişmediği
-doğrulandı. Kalanlar: gerçek `MUSTAFA.cdr` ile V5, grup/PowerClip smoke davranışı ve sorunları
-kullanıcıya gösteren rapor arayüzü. Gerçek fixture yok; Nesting'e geçilmedi.
+dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve PowerClip içindeki eğrinin
+`UnsupportedObject` ile atlandığı ve şekil eklemediği doğrulandı. Kalanlar: gerçek
+`MUSTAFA.cdr` ile V5 ve sorunları kullanıcıya gösteren rapor arayüzü. Gerçek fixture yok;
+Nesting'e geçilmedi.
 
 P1'de **yapılmayanlar:** NFP/nesting, önizleme UI'si, belirsizlik onay ekranı, addon kurulumu.
 
@@ -127,4 +128,4 @@ P1'de **yapılmayanlar:** NFP/nesting, önizleme UI'si, belirsizlik onay ekranı
 |---|---|---|
 | 2026-11-14 | P0 | İskelet, dokümantasyon, ADR'ler, OpenCode uyarlamaları oluşturuldu |
 | 2026-11-14 | P1 | Geometri çekirdeği, 51 test, COM adaptörü, smoke harness; V4 PASS; ADR-0008 eklendi |
-| 2026-11-14 | P2 | Türkçe regresyonu (52 test) + UnsupportedObject Corel smoke PASS; P2 sürüyor |
+| 2026-11-14 | P2 | Türkçe regresyonu (52 test) + dikdörtgen/grup/PowerClip UnsupportedObject Corel smoke PASS; P2 sürüyor |
