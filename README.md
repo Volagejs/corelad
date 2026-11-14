@@ -13,9 +13,9 @@ CorelDRAW 2026 (x64, v27.x) içinde çalışan, kutu harf üretimine yönelik ar
 gerçek CorelDRAW 27.2'de smoke testi PASS. Dock UI/addon kurulumu henüz yok (P5).
 Ayrıntı: [`docs/STATUS.md`](docs/STATUS.md), [`docs/P1-integration-plan.md`](docs/P1-integration-plan.md).
 
-**P2 sertleştirmesi sürüyor.** Geometri testleri şu an 52 test içeriyor; P1'in 51 testine
-Türkçe karakter kontur regresyonu eklendi. Eğri olmayan nesnenin güvenle atlandığı CorelDRAW
-v27.2 smoke testinde doğrulandı.
+**P2 sertleştirmesi sürüyor.** Geometri testleri şu an 52 test içeriyor; Türkçe karakter
+regresyonu ve grup/PowerClip güvenlik kontrolleri var. Bağımsız sorun raporu WPF paneli derleniyor;
+CorelDRAW dock'una bağlanması ve gerçek üretim çizimiyle denenmesi henüz yapılmadı.
 
 ## Yapı
 

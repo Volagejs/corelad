@@ -2,8 +2,9 @@
 
 CorelDRAW 2026 (v27.x) addon'u + WPF dock. Hedef `net48` (ADR-0002).
 
-P1'de COM adaptörü ve Smart Divide servisi tamamlandı; XAML/dock UI, addon giriş noktası ve
-XSLT **P5'te** eklenecek. Hiçbir dosya CorelDRAW eklenti klasörüne kopyalanmadı.
+P1'de COM adaptörü ve Smart Divide servisi tamamlandı. P2'de bağımsız sorun raporu WPF paneli
+eklendi; addon giriş noktası, XSLT ile dock kaydı ve CorelDRAW içinde açılması henüz yapılmadı.
+Hiçbir dosya CorelDRAW eklenti klasörüne kopyalanmadı.
 
 Yapı:
 
@@ -16,9 +17,10 @@ Corel/
   CorelShapeSnapshot.cs  kaynak değişmedi kanıtı (deterministik imza)
   SmartDivideService.cs  analiz + tek undo grubu
   SmartDivideRunResult.cs sonuç/rapor modeli
+  SmartDivideProblemReportAdapter.cs çalışma sonucunu panel Problem listesine çevirir
 Addon.cs                 giriş noktası, UI kaydı (P5)
 ViewModels/              durum, komutlar, ilerleme/iptal (P2/P5)
-Views/                   XAML dock (P5)
+Views/                   ProblemReportPanel (P2); dock'a yerleştirme (P5)
 Assets/                  AppUI.xslt, UserUI.xslt, Coreldrw.addon (P5)
 ```
 

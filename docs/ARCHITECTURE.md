@@ -79,7 +79,9 @@ Problem       { ProblemCode Code, Severity Severity, int? ShapeId, int? SubPathI
 5. Ağaç: çift derinlik = dış gövde, tek derinlik = delik, çift derinlik = ada. Ayrık parçalar
    (İ noktası, j noktası, Ç/Ğ işaretleri) **bağlanmaz**; yalnızca `DetachedComponent` uyarısı.
 6. Belirsizlik tespiti → `Problem` (bkz. §7). `Error` varsa hiçbir nesne yazılmaz.
-7. Önizleme P1'de yoktur; sonuç raporu metinseldir.
+7. Analiz `Problem` kayıtları ve `SmartDivideRunResult` rapor adaptöründen `ProblemReportViewModel`'e
+   taşınır. WPF paneli Türkçe başlık/açıklama ve indeksleri gösterir; seçilen sorun için yalnızca
+   kontur vurgu isteği üretir. Corel'de vurgu uygulama ve paneli dock kabuğuna yerleştirme henüz yoktur.
 8. Uygulama: tüm aday eğrileri **detached** olarak kurulur ve yaz→oku round-trip ile doğrulanır.
    Doğrulama geçerse `BeginCommandGroup` → aday başına bir `Layer.CreateCurve` (gövde + delikler
    aynı curve içinde) → `EndCommandGroup`. Kaynak şekle dokunulmaz; tek `Ctrl+Z` tüm yeni

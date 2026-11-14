@@ -8,7 +8,7 @@ Son güncelleme: 2026-11-14
 |---|---|---|---|
 | P0 | Proje iskeleti + dokümantasyon | **TAMAMLANDI** | Üretim kodu yok, CorelDRAW kurulumu yok |
 | P1 | Çalışan dikey dilim (seçim → analiz → geri yaz) | **TAMAMLANDI** | V4 smoke PASS (v27.2.0.135); UI/addon yok (P5) |
-| P2 | Smart Divide sertleştirme | **DEVAM EDİYOR** | Türkçe regresyon + UnsupportedObject grup/PowerClip smoke kontrolleri |
+| P2 | Smart Divide sertleştirme | **DEVAM EDİYOR** | Türkçe regresyon, UnsupportedObject smoke, rapor paneli/adaptörü; test ve gerçek fixture bekliyor |
 | P3 | Nesting v1 (tek levha) | Bekliyor | — |
 | P4 | Nesting v2 (çoklu levha, delik içi, bütçe) | Bekliyor | — |
 | P5 | UX + paketleme | Bekliyor | — |
@@ -54,6 +54,8 @@ Son güncelleme: 2026-11-14
     `CorelShapeSnapshot`, `SmartDivideService`, `SmartDivideRunResult`
 - `tools/Corelad.SmokeTest/` — net48 x64 STA konsol smoke harness'ı (+ `--probe` API probu)
 - `tests/Corelad.Geometry.Tests/` — P1'de 51 test; P2 ile güncel toplam 52 test, GDI+ font desteği
+- P2 rapor sunumu: `Corel/SmartDivideProblemReportAdapter`, `Diagnostics/ProblemReport*`,
+  `ViewModels/ProblemReportViewModel`, `Views/ProblemReportPanel` (bağımsız WPF bileşeni; dock host'a bağlanmadı)
 
 ### 2.5 P1 sonuçları
 
@@ -64,6 +66,7 @@ Son güncelleme: 2026-11-14
 | V4 smoke (gerçek CorelDRAW v27.2.0.135) | **PASS** — 7 aday, 2 delik, 0 Error; kaynak imzası değişmedi; `Undo(1)` yeni 7 nesneyi kaldırdı |
 | P2 Türkçe karakter regresyonu | **PASS** — `ÇĞİıÖŞÜ` konturları kaybolmadan, deterministik analiz edildi; 52/52 test |
 | P2 UnsupportedObject smoke | **PASS** — dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve içindeki eğri atlandı; hiçbiri çıktı yazmadı |
+| P2 sorun raporu bileşeni | **DERLENDİ** — WPF paneli ve run-result adaptörü çözüm içinde derleniyor; CorelDRAW dock'unda açılma doğrulanmadı |
 | Kaynak belge kaydı | **Yapılmadı** — `Dirty = false` + `Close()` |
 | Addon klasörüne yazma | **Yapılmadı** |
 | Corel interop çıktıya kopyalama | **Yapılmadı** (`Private=false`) |
@@ -116,9 +119,10 @@ P1'de tamamlananlar:
 
 P2 çalışması: `ÇĞİıÖŞÜ` için deterministik font konturu regresyonu eklendi; gerçek CorelDRAW'da
 dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve PowerClip içindeki eğrinin
-`UnsupportedObject` ile atlandığı ve şekil eklemediği doğrulandı. Kalanlar: gerçek
-`MUSTAFA.cdr` ile V5 ve sorunları kullanıcıya gösteren rapor arayüzü. Gerçek fixture yok;
-Nesting'e geçilmedi.
+`UnsupportedObject` ile atlandığı ve şekil eklemediği doğrulandı. Türkçe sorun raporu paneli ve
+çalışma sonucu adaptörü eklendi; panel henüz addon dock'una bağlanmadı. Kalanlar: ViewModel
+otomatik testleri, gerçek `MUSTAFA.cdr` ile V5 ve Corel'de panel/vurgu entegrasyonu. Gerçek
+fixture yok; Nesting'e geçilmedi.
 
 P1'de **yapılmayanlar:** NFP/nesting, önizleme UI'si, belirsizlik onay ekranı, addon kurulumu.
 
@@ -128,4 +132,4 @@ P1'de **yapılmayanlar:** NFP/nesting, önizleme UI'si, belirsizlik onay ekranı
 |---|---|---|
 | 2026-11-14 | P0 | İskelet, dokümantasyon, ADR'ler, OpenCode uyarlamaları oluşturuldu |
 | 2026-11-14 | P1 | Geometri çekirdeği, 51 test, COM adaptörü, smoke harness; V4 PASS; ADR-0008 eklendi |
-| 2026-11-14 | P2 | Türkçe regresyonu (52 test) + dikdörtgen/grup/PowerClip UnsupportedObject Corel smoke PASS; P2 sürüyor |
+| 2026-11-14 | P2 | Türkçe regresyonu, grup/PowerClip smoke, sorun paneli/adaptörü; P2 sürüyor |
