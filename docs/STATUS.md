@@ -54,6 +54,7 @@ Son güncelleme: 2026-11-14
     `CorelShapeSnapshot`, `SmartDivideService`, `SmartDivideRunResult`
 - `tools/Corelad.SmokeTest/` — net48 x64 STA konsol smoke harness'ı (+ `--probe` API probu)
 - `tests/Corelad.Geometry.Tests/` — P1'de 51 test; P2 ile güncel toplam 52 test, GDI+ font desteği
+- `tests/Corelad.Dock.Tests/` — sorun raporu ViewModel/DTO/metin için 37 test; CorelDRAW COM başlatmaz
 - P2 rapor sunumu: `Corel/SmartDivideProblemReportAdapter`, `Diagnostics/ProblemReport*`,
   `ViewModels/ProblemReportViewModel`, `Views/ProblemReportPanel` (bağımsız WPF bileşeni; dock host'a bağlanmadı)
 
@@ -67,6 +68,7 @@ Son güncelleme: 2026-11-14
 | P2 Türkçe karakter regresyonu | **PASS** — `ÇĞİıÖŞÜ` konturları kaybolmadan, deterministik analiz edildi; 52/52 test |
 | P2 UnsupportedObject smoke | **PASS** — dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve içindeki eğri atlandı; hiçbiri çıktı yazmadı; atlama hatası rapora çevrildi |
 | P2 sorun raporu bileşeni | **DERLENDİ** — WPF paneli ve run-result adaptörü çözüm içinde derleniyor; CorelDRAW dock'unda açılma doğrulanmadı |
+| P2 rapor modeli testleri | **PASS** — `Corelad.Dock.Tests` 37/37; ViewModel, indeks gösterimi, metinler ve vurgu isteği |
 | Kaynak belge kaydı | **Yapılmadı** — `Dirty = false` + `Close()` |
 | Addon klasörüne yazma | **Yapılmadı** |
 | Corel interop çıktıya kopyalama | **Yapılmadı** (`Private=false`) |
@@ -120,8 +122,8 @@ P1'de tamamlananlar:
 P2 çalışması: `ÇĞİıÖŞÜ` için deterministik font konturu regresyonu eklendi; gerçek CorelDRAW'da
 dikdörtgen, grup, grup içi eğri, PowerClip çerçevesi ve PowerClip içindeki eğrinin
 `UnsupportedObject` ile atlandığı ve şekil eklemediği doğrulandı. Türkçe sorun raporu paneli ve
-çalışma sonucu adaptörü eklendi; panel henüz addon dock'una bağlanmadı. Kalanlar: ViewModel
-otomatik testleri, gerçek `MUSTAFA.cdr` ile V5 ve Corel'de panel/vurgu entegrasyonu. Gerçek
+çalışma sonucu adaptörü eklendi; 37 rapor modeli testi geçti. Panel henüz addon dock'una
+bağlanmadı. Kalanlar: gerçek `MUSTAFA.cdr` ile V5 ve Corel'de panel/vurgu entegrasyonu. Gerçek
 fixture yok; Nesting'e geçilmedi.
 
 P1'de **yapılmayanlar:** NFP/nesting, önizleme UI'si, belirsizlik onay ekranı, addon kurulumu.
@@ -132,4 +134,4 @@ P1'de **yapılmayanlar:** NFP/nesting, önizleme UI'si, belirsizlik onay ekranı
 |---|---|---|
 | 2026-11-14 | P0 | İskelet, dokümantasyon, ADR'ler, OpenCode uyarlamaları oluşturuldu |
 | 2026-11-14 | P1 | Geometri çekirdeği, 51 test, COM adaptörü, smoke harness; V4 PASS; ADR-0008 eklendi |
-| 2026-11-14 | P2 | Türkçe regresyonu, grup/PowerClip smoke, sorun paneli/adaptörü; P2 sürüyor |
+| 2026-11-14 | P2 | Türkçe regresyonu, grup/PowerClip smoke, sorun paneli/adaptörü ve 37 Dock testi; P2 sürüyor |

@@ -13,8 +13,8 @@ CorelDRAW 2026 (x64, v27.x) içinde çalışan, kutu harf üretimine yönelik ar
 gerçek CorelDRAW 27.2'de smoke testi PASS. Dock UI/addon kurulumu henüz yok (P5).
 Ayrıntı: [`docs/STATUS.md`](docs/STATUS.md), [`docs/P1-integration-plan.md`](docs/P1-integration-plan.md).
 
-**P2 sertleştirmesi sürüyor.** Geometri testleri şu an 52 test içeriyor; Türkçe karakter
-regresyonu ve grup/PowerClip güvenlik kontrolleri var. Bağımsız sorun raporu WPF paneli derleniyor;
+**P2 sertleştirmesi sürüyor.** Testler: geometri 52/52, rapor sunumu 37/37. Türkçe karakter
+regresyonu ve grup/PowerClip güvenlik kontrolleri var. Sorun raporu WPF paneli derleniyor;
 CorelDRAW dock'una bağlanması ve gerçek üretim çizimiyle denenmesi henüz yapılmadı.
 
 ## Yapı
@@ -26,7 +26,7 @@ docs/                         Gereksinim, mimari, ADR, durum, doğrulama
 .opencode/                    Proje skill'leri ve komutları
 src/Corelad.Geometry/         Saf geometri çekirdeği (CorelDRAW bağımsız)
 src/Corelad.Dock/             net48 WPF addon + COM adaptörü (UI P5'te)
-tests/                        Geometri testleri (CorelDRAW açmadan)
+tests/                        Geometri + rapor sunumu testleri (CorelDRAW açmadan)
 tools/Corelad.SmokeTest/      Gerçek CorelDRAW smoke harness'ı
 fixtures/                     Test girdisi sözleşmesi
 ```
@@ -36,7 +36,7 @@ fixtures/                     Test girdisi sözleşmesi
 ```bash
 dotnet restore Corelad.sln
 dotnet build   Corelad.sln -c Debug
-dotnet test    tests/Corelad.Geometry.Tests/Corelad.Geometry.Tests.csproj
+dotnet test    Corelad.sln -c Debug
 
 # Gerçek CorelDRAW smoke (yeni belge açar, kaydetmeden kapatır)
 tools\Corelad.SmokeTest\bin\Debug\Corelad.SmokeTest.exe

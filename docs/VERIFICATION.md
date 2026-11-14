@@ -74,6 +74,7 @@ Kural: Bir rapor satırı birden fazla etiket taşıyamaz. "Derleme geçti" cüm
 | 2026-11-14 | `cdrCurveShape` PowerClip çerçevesi ve içindeki eğri `UnsupportedObject` ile atlanıyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; çerçeve/içerik için şekil sayısı değişmedi |
 | 2026-11-14 | Atlanan nesnenin `SkipCode` ve mesajı panelin `Problem` kaydına çevriliyor | `[DOĞRULANDI: CorelDRAW v27.2]` | Smoke P2; dikdörtgen, grup ve PowerClip sonuçları `UnsupportedObject` hata girdisine dönüştü |
 | 2026-11-14 | Sorun raporu paneli XAML'i ve `SmartDivideProblemReportAdapter` derleniyor | `[DOĞRULANDI: derleme]` | `dotnet build Corelad.sln -c Debug` — 0 uyarı/hata |
+| 2026-11-14 | Sorun raporu ViewModel, sunum DTO'ları ve Türkçe metin eşlemeleri | `[DOĞRULANDI: birim testi]` | `Corelad.Dock.Tests` — 37/37 geçti, COM/CorelDRAW açılmadı |
 
 **V2 notu:** P0'da test projesi bilinçli olarak 0 test içeriyordu; P1'de 51 test ile V2 kapısı
 karşılandı. Testler CorelDRAW açmadan çalışır; gerçek font konturları GDI+ ile üretilir (ADR-0008).
