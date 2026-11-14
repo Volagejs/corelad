@@ -163,7 +163,7 @@ namespace Corelad.Dock.ViewModels
 
                 return string.Format(
                     CultureInfo.CurrentCulture,
-                    "Kontur {0} için vurgu isteği iletildi. Enter ile yeniden isteyebilirsiniz.",
+                    "Kontur {0} ile ilişkili sorun seçili. Enter ile vurgu isteğini yeniden gönderebilirsiniz.",
                     (_selectedItem.HighlightContourIndex ?? 0) + 1);
             }
         }

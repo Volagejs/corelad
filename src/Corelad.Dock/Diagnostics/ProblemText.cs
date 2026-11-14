@@ -83,8 +83,9 @@ namespace Corelad.Dock.Diagnostics
             switch (code)
             {
                 case ProblemCode.OpenContour:
-                    return "Kontur zinciri başladığı noktaya dönmüyor. Açık kontur harf gövdesi olarak " +
-                           "değerlendirilemez. Çizimi kapatın veya bu harfi atlayın; otomatik onarım yapılmaz.";
+                    return "Kontur CorelDRAW'da kapalı olarak işaretlenmemiş. Açık kontur harf gövdesi " +
+                           "olarak değerlendirilemez. Konturu CorelDRAW'da kapatın veya bu harfi atlayın; " +
+                           "otomatik onarım yapılmaz.";
                 case ProblemCode.SelfIntersection:
                     return "Kontur kendi üzerinden geçiyor; kapalı alan belirsiz. Kesişen düğümleri " +
                            "temizleyin. Geometri sessizce düzeltilmez.";
@@ -113,8 +114,9 @@ namespace Corelad.Dock.Diagnostics
                     return "Başka bir gövdenin deliği içinde ayrı bir gövde var; ayrı parça olarak " +
                            "değerlendirildi. Doğruysa onaylayın, değilse geometriyi düzeltin.";
                 case ProblemCode.UnsupportedObject:
-                    return "Seçili nesne eğri değil (grup, PowerClip, bitmap veya efekt). Yalnızca tek bir " +
-                           "eğri nesnesi desteklenir. Grubu çözün veya nesneyi eğriye dönüştürün.";
+                    return "Smart Divide yalnızca bağımsız bir cdrCurveShape üzerinde çalışır. Grup, " +
+                           "grup içindeki eğri ve PowerClip çerçevesi/içeriği desteklenmez. Yapıyı " +
+                           "CorelDRAW'da bağımsız bir eğri seçilecek şekilde düzenleyip yeniden deneyin.";
                 case ProblemCode.OutsideSheet:
                     return "Parça levha sınırının dışına çıkıyor. Levha ölçüsünü veya yerleşimi düzeltin; " +
                            "sınır ihlali olan yerleşim uygulanmaz.";
